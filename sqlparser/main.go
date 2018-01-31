@@ -10,7 +10,7 @@ import (
 )
 
 var mainCmd = &cobra.Command{
-	Use: "main",
+	Use: "sp",
 	Run: func(cmd *cobra.Command, args []string){
 			fmt.Println("test")
 		},

@@ -1,9 +1,0 @@
-syntax = 'proto3';
-
-package main;
-
-option go_package = 'main';
-
-service AOBService{
-	rpc CheckAccess() returns ()
-}

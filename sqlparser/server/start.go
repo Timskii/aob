@@ -6,6 +6,10 @@ import (
 	"net"
 
 	"github.com/spf13/cobra"
+	"google.golang.org/grpc"
+
+	pb "ps.kz/aob/protos"
+	"ps.kz/aob/sqlparser/core"
 )
 
 func startCmd() *cobra.Command {
@@ -28,6 +32,9 @@ func startServer(args []string)  error {
 		fmt.Println("err =", err)
 	}
 	defer lis.Close()
+	ser := grpc.NewServer()
+	pb.RegisterAOBServiceServer(ser, core.NewAdminServer())
+	ser.Serve(lis)
 	fmt.Println("server srarted")
 	return nil
 

@@ -6,7 +6,7 @@ import (
 
 		"github.com/spf13/cobra"
 
-		"ps.kz/aob/main/server"
+		"ps.kz/aob/sqlparser/server"
 )
 
 var mainCmd = &cobra.Command{
@@ -19,6 +19,5 @@ var mainCmd = &cobra.Command{
 func main() {
 
 	mainCmd.AddCommand(server.Cmd())
-
 	mainCmd.Execute()
 }

@@ -26,10 +26,10 @@ func (*ServerAdmin) CheckAccess (ctx context.Context, userSql *pb.UserSql) (*pb.
 
 func (*ServerAdmin) ParseSql (ctx context.Context, script *pb.Script) (*pb.ObjScript, error){
 	log.Println(script)
-	objScript := &pb.ObjScript{`{
-		"select":"*",
-		"from":"test"
-		}`}
+	objScript := &pb.ObjScript{`{`+
+		`"select":"*",`+
+		`"from":"test1"`+
+		`}`}
 	
 	return objScript, nil
 }

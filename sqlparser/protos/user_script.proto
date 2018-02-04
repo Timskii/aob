@@ -1,0 +1,16 @@
+syntax = 'proto3';
+
+package proto;
+
+service AOBService{
+	rpc ParseSql (Script) returns (ObjScript){}
+}
+
+
+message Script {
+	string script = 1;
+}
+
+message ObjScript {
+	string objScript = 1;
+}

@@ -1,0 +1,21 @@
+syntax = 'proto3';
+
+package proto;
+
+service AOBService{
+	rpc ParseAndCheckAccess(UserSql) returns (UserSql){}
+	rpc ParseSql (Script) returns (ObjScript){}
+}
+
+message UserSql {
+	string user = 1;
+	string script = 2;
+}
+
+message Script {
+	string script = 1;
+}
+
+message ObjScript {
+	string objScript = 1;
+}

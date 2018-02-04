@@ -2,7 +2,7 @@ package core
 
 import "testing"
 import "fmt"
-import pb "ps.kz/aob/protos"
+import pb "ps.kz/aob/sqlparser/protos"
 import "golang.org/x/net/context"
 
 func TestParseSql(t *testing.T) {

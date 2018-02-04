@@ -1,0 +1,12 @@
+syntax = 'proto3';
+
+package proto;
+
+service AOBService{
+	rpc CheckAccess(UserSql) returns (UserSql){}
+}
+
+message UserSql {
+	string user = 1;
+	string script = 2;
+}

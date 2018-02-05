@@ -16,7 +16,7 @@ const (
 
 func cache(userSql *pb.UserSql) {
 	log.Println("cache")
-	conn, err := grpc.Dial(addressCA, grpc.WithInsecure())
+	conn, err := grpc.Dial(address, grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}

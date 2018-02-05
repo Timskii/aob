@@ -8,7 +8,7 @@ import (
 	"github.com/spf13/cobra"
 	"google.golang.org/grpc"
 	pb "ps.kz/aob/cache/protos"
-	"ps.kz/aob/core"
+	"ps.kz/aob/cache/core"
 )
 
 

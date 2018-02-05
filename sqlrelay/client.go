@@ -7,7 +7,7 @@ import (
 
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
-	pb "ps.kz/aob/protos"
+	pb "ps.kz/aob/sqlrelay/protos"
 )
 
 const (

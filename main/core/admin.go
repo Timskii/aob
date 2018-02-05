@@ -27,3 +27,6 @@ func (*ServerAdmin) ParseAndCheckAccess (ctx context.Context, userSql *pb.UserSq
 func (*ServerAdmin) ParseSql (ctx context.Context, script *pb.Script) (*pb.ObjScript, error){
 	return nil, nil
 }
+func (*ServerAdmin) CheckAccess(ctx context.Context, userSql *pb.UserSql) (*pb.UserSql, error) {
+	return nil, nil
+}

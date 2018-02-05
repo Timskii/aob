@@ -5,6 +5,7 @@ package proto;
 service AOBService{
 	rpc ParseAndCheckAccess(UserSql) returns (UserSql){}
 	rpc ParseSql (Script) returns (ObjScript){}
+	rpc CheckAccess(UserSql) returns (UserSql){}
 }
 
 message UserSql {

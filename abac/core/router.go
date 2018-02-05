@@ -1,5 +1,5 @@
 package core
-
+/*
 import (
 	"log"
 	
@@ -33,4 +33,4 @@ func parser(userSql *pb.UserSql){
 
 func cache(*pb.UserSql) {
 	log.Println("cache")
-}
+}*/

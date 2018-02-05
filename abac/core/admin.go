@@ -4,7 +4,7 @@ import (
 		"log"
 
 		"golang.org/x/net/context"
-		pb "ps.kz/aob/protos"
+		pb "ps.kz/aob/abac/protos"
 		)
 
 func NewAdminServer() *ServerAdmin {
@@ -17,19 +17,6 @@ type ServerAdmin struct{
 }
 
 func (*ServerAdmin) CheckAccess (ctx context.Context, userSql *pb.UserSql) (*pb.UserSql, error){
-	log.Println(userSql)
-	userSql.Script = "select * from test"
-	parser(userSql)
-	cache(userSql)
+	log.Println("abac")
 	return userSql,nil
-}
-
-func (*ServerAdmin) ParseSql (ctx context.Context, script *pb.Script) (*pb.ObjScript, error){
-	log.Println(script)
-	objScript := &pb.ObjScript{`{`+
-		`"select":"*",`+
-		`"from":"test1"`+
-		`}`}
-	
-	return objScript, nil
 }

@@ -4,18 +4,9 @@ package proto;
 
 service AOBService{
 	rpc CheckAccess(UserSql) returns (UserSql){}
-	rpc ParseSql (Script) returns (ObjScript){}
 }
 
 message UserSql {
 	string user = 1;
 	string script = 2;
-}
-
-message Script {
-	string script = 1;
-}
-
-message ObjScript {
-	string objScript = 1;
 }

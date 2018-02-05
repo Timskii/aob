@@ -6,7 +6,7 @@ import (
 
 		"github.com/spf13/cobra"
 
-		"ps.kz/aob/main/server"
+		"ps.kz/aob/abac/server"
 )
 
 var mainCmd = &cobra.Command{

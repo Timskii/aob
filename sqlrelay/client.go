@@ -28,7 +28,7 @@ func main() {
 	defer conn.Close()
 	c := pb.NewAOBServiceClient(conn)
 	
-	r, err := c.CheckAccess(context.Background(), &pb.UserSql{User:"tim",Script:"select * frim dual"})
+	r, err := c.ParseAndCheckAccess(context.Background(), &pb.UserSql{User:"tim",Script:"select * frim dual"})
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)
 	}

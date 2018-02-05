@@ -7,8 +7,8 @@ import (
 
 	"github.com/spf13/cobra"
 	"google.golang.org/grpc"
-	pb "ps.kz/aob/protos"
-	"ps.kz/aob/core"
+	pb "ps.kz/aob/abac/protos"
+	"ps.kz/aob/abac/core"
 )
 
 
@@ -27,7 +27,7 @@ var serverStartCmd = &cobra.Command{
 
 
 func startServer(args []string)  error {
-	lis, err := net.Listen("tcp","localhost:4000")
+	lis, err := net.Listen("tcp","localhost:4003")
 	if err!=nil {
 		fmt.Println("err =", err)
 	}

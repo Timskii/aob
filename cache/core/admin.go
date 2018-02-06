@@ -1,7 +1,7 @@
 package core
 
 import (
-		"log"
+		
 
 		"golang.org/x/net/context"
 		pb "ps.kz/aob/cache/protos"
@@ -17,7 +17,6 @@ type ServerAdmin struct{
 }
 
 func (*ServerAdmin) CheckAccess (ctx context.Context, userSql *pb.UserSql) (*pb.UserSql, error){
-	log.Println(userSql)
 
 	cache(userSql)
 	

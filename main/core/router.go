@@ -29,11 +29,11 @@ func parser(userSql *pb.UserSql){
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)
 	}
-	log.Printf("Greeting: %s", r)
+	userSql.Script = r.ObjScript
+	log.Printf("Greeting: %s", userSql.Script)
 }
 
 func cache(userSql *pb.UserSql) {
-	log.Println("cache")
 	conn, err := grpc.Dial(addressCA, grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
@@ -41,9 +41,9 @@ func cache(userSql *pb.UserSql) {
 	defer conn.Close()
 	c := pb.NewAOBServiceClient(conn)
 
-	r, err := c.CheckAccess(context.Background(), userSql)
+	userSql, err = c.CheckAccess(context.Background(), userSql)
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)
 	}
-	log.Printf("Greeting: %s", r)
+	log.Printf("Greeting: %s", userSql)
 }

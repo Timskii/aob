@@ -17,7 +17,7 @@ type ServerAdmin struct{
 }
 
 func (*ServerAdmin) ParseSql (ctx context.Context, script *pb.Script) (*pb.ObjScript, error){
-	log.Println(script)
+	log.Println("parseSql",script)
 	objScript := &pb.ObjScript{`{`+
 		`"select":"*",`+
 		`"from":"test1"`+

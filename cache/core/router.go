@@ -23,9 +23,9 @@ func cache(userSql *pb.UserSql) {
 	defer conn.Close()
 	c := pb.NewAOBServiceClient(conn)
 
-	r, err := c.CheckAccess(context.Background(), userSql)
+	userSql, err = c.CheckAccess(context.Background(), userSql)
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)
 	}
-	log.Printf("Greeting: %s", r)
+	log.Printf("Greeting: %s", userSql)
 }

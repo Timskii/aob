@@ -17,6 +17,6 @@ type ServerAdmin struct{
 }
 
 func (*ServerAdmin) CheckAccess (ctx context.Context, userSql *pb.UserSql) (*pb.UserSql, error){
-	log.Println("abac")
+	log.Println("abac ", userSql)
 	return userSql,nil
 }

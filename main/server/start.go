@@ -2,7 +2,7 @@ package server
 
 import (
 		
-	"fmt"
+	"log"
 	"net"
 
 	"github.com/spf13/cobra"
@@ -29,14 +29,14 @@ var serverStartCmd = &cobra.Command{
 func startServer(args []string)  error {
 	lis, err := net.Listen("tcp","localhost:4000")
 	if err!=nil {
-		fmt.Println("err =", err)
+		log.Println("err =", err)
 	}
 	defer lis.Close()
 
 	ser := grpc.NewServer()
 	pb.RegisterAOBServiceServer(ser, core.NewAdminServer())
 	ser.Serve(lis)
-	fmt.Println("server srarted")
+	log.Println("server srarted")
 	return nil
 
 }

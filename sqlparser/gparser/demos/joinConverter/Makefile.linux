@@ -1,5 +1,5 @@
 LIB_DIR =  ../../lib
-BUILD_DIR = ../build
+BUILD_DIR = .
 DEMO_SRC_DIR = .
 CORE_DIR = ../../core
 COLLECTION_DIR = ../../ext/collection

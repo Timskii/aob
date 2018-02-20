@@ -24,6 +24,7 @@
 #include <stdlib.h>
 #include <stddef.h>
 #include <string.h>
+#include <stdio.h>
 
 static List* tableInfoList;
 static List* fieldInfoList;
@@ -41,11 +42,17 @@ static gsp_objectname* _getTableName(gsp_node* table){
 }
 
 static void _process_table(gsp_node *node, struct gsp_visitor *visitor){
+	
 	char *str;
+	char *test;
 	int index;
 	SqlTraverser *traverser = (SqlTraverser *)visitor->context;
 	if(traverser->isBaseTable(traverser, (gsp_node*)node)){
 		str = gsp_node_text((gsp_node *)_getTableName(node));
+		test = gsp_node_text(node);
+		printf("\nstr = %s\n",str);
+		printf("\ntest = %s\n",test);
+		printf("\nt-gasp = %d\n",t_gsp_table);
 		if(!tableInfoList->contains(tableInfoList, str)){
 			tableInfoList->add(tableInfoList, str);
 		}
@@ -58,8 +65,10 @@ static void _process_table(gsp_node *node, struct gsp_visitor *visitor){
 					char* fieldName = (char *)malloc((strlen(str) + field->partToken->nStrLen + 2 + 24)*sizeof(char));
 					memset(fieldName,'\0', (strlen(str) + field->partToken->nStrLen + 2 + 24)*sizeof(char));
 					strcat(fieldName,str);
+					printf("fieldname = %s\n",fieldName);
 					strcat(fieldName,".");
 					strncat(fieldName,field->partToken->pStr, field->partToken->nStrLen);
+					printf("fieldname2 = %s\n",fieldName);
 					strcat(fieldName,"(table determined:");
 					strcat(fieldName,traverser->isTableDetermined(traverser, field)?"true":"false");
 					strcat(fieldName,")");
@@ -124,6 +133,43 @@ static void _printListInfo(List *list, FILE *infoResult ){
 	_printInfo(infoResult,"\n");
 }
 
+static void _process_table_test(gsp_node *node, SqlTraverser *traverser){
+	
+	char *str;
+	char *test;
+	int index;
+	 
+	if(traverser->isBaseTable(traverser, (gsp_node*)node)){
+		str = gsp_node_text((gsp_node *)_getTableName(node));
+		test = gsp_node_text(node);
+		printf("str = %s\n",str);
+		printf("test = %s\n",test);
+		if(!tableInfoList->contains(tableInfoList, str)){
+			tableInfoList->add(tableInfoList, str);
+		}
+		{
+			List *fields = (List *)traverser->getTableObjectNameReferences(traverser, node);
+			if(fields!=NULL){
+				Iterator fieldIter = fields->getIterator(fields);
+				while(fields->hasNext(fields, &fieldIter)){
+					gsp_objectname *field = (gsp_objectname *)fields->next(&fieldIter);
+					char* fieldName = (char *)malloc((strlen(str) + field->partToken->nStrLen + 2 + 24)*sizeof(char));
+					memset(fieldName,'\0', (strlen(str) + field->partToken->nStrLen + 2 + 24)*sizeof(char));
+					strcat(fieldName,str);
+					strcat(fieldName,".");
+					strncat(fieldName,field->partToken->pStr, field->partToken->nStrLen);
+					printf("fieldname = %s\n",fieldName);
+					strcat(fieldName,"(table determined:");
+					strcat(fieldName,traverser->isTableDetermined(traverser, field)?"true":"false");
+					strcat(fieldName,")");
+					if(!fieldInfoList->contains(fieldInfoList, fieldName))
+						fieldInfoList->add(fieldInfoList, fieldName);
+				}
+			}
+		}
+	}
+}
+
 int main(int argc,char *argv[])
 {
 	int rc, argIndex, index;
@@ -136,9 +182,9 @@ int main(int argc,char *argv[])
 //	char *sqlText = "select employee_id,job_id\nfrom employees\nunion\nselect employee_id,job_id\nfrom job_history;";
 	//gsp_dbvendor vendor = dbvoracle;
 
-	char *sqlText = "select revision from mailstore for update";
+	char *sqlText = "select m.revision, m.esttim, t.data from mailstore m, testtab t";
 
-	gsp_dbvendor vendor = dbvpostgresql;//dbvoracle;
+	gsp_dbvendor vendor = dbvoracle;
  
 	//argList = createStringList(FALSE);
 
@@ -224,7 +270,7 @@ int main(int argc,char *argv[])
 	traverser = createSqlTraverser();
 	visitor = _createVisitor(traverser);
 
-	for(index=0;index<parser->nStatement;index++ ){
+	/*for(index=0;index<parser->nStatement;index++ ){
 		nodeList = traverser->traverseSQL(traverser, &parser->pStatement[index]);
 		iter = nodeList->getIterator(nodeList);
 		while(nodeList->hasNext(nodeList,&iter))
@@ -235,11 +281,26 @@ int main(int argc,char *argv[])
 			else if(node->nodeType == t_gsp_fromTable )
 				visitor->handle_node[t_gsp_fromTable](node, visitor);
 		}
+	}*/
+
+	
+
+	for(index=0;index<parser->nStatement;index++ ){
+		nodeList = traverser->traverseSQL(traverser, &parser->pStatement[index]);
+		iter = nodeList->getIterator(nodeList);
+		while(nodeList->hasNext(nodeList,&iter))
+		{
+			gsp_node *node = (gsp_node*)nodeList->next(&iter);
+			if(node->nodeType == t_gsp_table )
+				_process_table_test(node,traverser);
+			else if(node->nodeType == t_gsp_fromTable )
+				_process_table_test(node,traverser);
+		}
 	}
 
 	if(!tableInfoList->isEmpty(tableInfoList)){
 		tableInfoList->sort(tableInfoList);
-		_printInfo(infoResult, "Tables:\n");
+		_printInfo(infoResult, "\nTables:\n");
 		_printListInfo(tableInfoList, infoResult);
 	}
 

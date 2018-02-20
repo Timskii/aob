@@ -91,15 +91,16 @@ int main(int argc,char *argv[])
 	List *argList;
 	FILE *sqlFile;
 	gsp_dbvendor vendor = dbvoracle;
+	char *sqlText = "select t.time, s.name from table1 t, sourse s";
+	/*
 	char *sqlText = "SELECT p.name AS product,\n"
 		"       p.listprice AS 'List Price',\n"
 		"       p.discount AS 'discount' \n"
 		"FROM   \n"
 		"  production1.product p \n"
-		"  left /*fdf */ JOIN production2.productsubcategory s ON p.productsubcategoryid = s.productsubcategoryid \n"
+		"  left /*fdf  JOIN production2.productsubcategory s ON p.productsubcategoryid = s.productsubcategoryid \n"
 		"WHERE  s.name LIKE product \n"
-		"       AND p.listprice < maxprice;  \n";
-
+		"       AND p.listprice < maxprice;  \n";*/
 
 	argList = createStringList(FALSE);
 

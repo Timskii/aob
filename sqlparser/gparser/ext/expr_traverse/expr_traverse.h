@@ -5,13 +5,13 @@
 extern "C" {
 #endif
 
-#include "gsp_base.h"
-#include "gsp_list.h"
-#include "gsp_sourcetoken.h"
-#include "gsp_node.h"
-#include "gsp_sqlparser.h"
-#include "lifo_stack.h"
-#include "memento.h"
+#include "../../core/gsp_base.h"
+#include "../../core/gsp_list.h"
+#include "../../core/gsp_sourcetoken.h"
+#include "../../core/gsp_node.h"
+#include "../../core/gsp_sqlparser.h"
+#include "../collection/includes/lifo_stack.h"
+#include "../collection/includes/memento.h"
 /*
  ** Return code from the expression tree walking primitives and their
  ** callbacks.

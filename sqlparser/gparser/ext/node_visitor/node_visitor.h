@@ -5,16 +5,16 @@
 extern "C" {
 #endif
 
-#include "gsp_base.h"
-#include "gsp_node.h"
-#include "gsp_list.h"
-#include "gsp_sourcetoken.h"
-#include "gsp_sqlparser.h"
-#include "linked_list.h"
-#include "tree_map.h"
-#include "memento.h"
-#include "comparer.h"
-#include "expr_traverse.h"
+#include "../../core/gsp_base.h"
+#include "../../core/gsp_node.h"
+#include "../../core/gsp_list.h"
+#include "../../core/gsp_sourcetoken.h"
+#include "../../core/gsp_sqlparser.h"
+#include "../collection/includes/linked_list.h"
+#include "../collection/includes/tree_map.h"
+#include "../collection/includes/memento.h"
+#include "../collection/includes/comparer.h"
+#include "../expr_traverse/expr_traverse.h"
 
 PRIVATE typedef enum ESqlClause
 {
@@ -119,7 +119,7 @@ typedef struct SqlTraverser
 	BOOL (*isBaseTable)(struct SqlTraverser*, gsp_node *table);
 }SqlTraverser;
 
-SqlTraverser* createSqlTraverser();
+SqlTraverser* createSqlTraverser(void);
 
 #ifdef __cplusplus
 }

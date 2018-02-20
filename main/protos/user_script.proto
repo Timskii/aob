@@ -11,6 +11,7 @@ service AOBService{
 message UserSql {
 	string user = 1;
 	string script = 2;
+	reperated ObjScript obj = 3;
 }
 
 message Script {
@@ -18,5 +19,6 @@ message Script {
 }
 
 message ObjScript {
-	string objScript = 1;
+	string tablename = 1;
+	reperated string columns = 2;
 }

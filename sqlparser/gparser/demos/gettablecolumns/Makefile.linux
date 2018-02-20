@@ -1,5 +1,5 @@
 LIB_DIR =  ../../lib
-BUILD_DIR = ../build
+BUILD_DIR = .
 DEMO_SRC_DIR = .
 CORE_DIR = ../../core
 COLLECTION_DIR = ../../ext/collection
@@ -12,14 +12,14 @@ CC = gcc
 CFLAGS = -c -I $(COLLECTION_DIR)/includes -I $(EXPRTRAVERSE_DIR) -I $(CORE_DIR) -I $(NODEVISITOR_DIR)
 
 
-DEMO_EXE = $(BUILD_DIR)/gettablecolumns
+DEMO_EXE = $(BUILD_DIR)/gettablecolumns_t
 
-SOURCE = $(DEMO_SRC_DIR)/gettablecolumns.c \
+SOURCE = $(DEMO_SRC_DIR)/gettablecolumns_t.c \
 	$(EXPRTRAVERSE_DIR)/expr_traverse.c \
 	$(NODEVISITOR_DIR)/node_visitor.c 
 	
 
-OBJECTS = $(BUILD_DIR)/gettablecolumns.o \
+OBJECTS = $(BUILD_DIR)/gettablecolumns_t.o \
 	$(BUILD_DIR)/expr_traverse.o \
 	$(BUILD_DIR)/node_visitor.o
 
@@ -40,7 +40,7 @@ create_build_dir:
 	    mkdir $(BUILD_DIR); \
 	fi \
 	 	
-$(BUILD_DIR)/gettablecolumns.o: $(DEMO_SRC_DIR)/gettablecolumns.c
+$(BUILD_DIR)/gettablecolumns_t.o: $(DEMO_SRC_DIR)/gettablecolumns_t.c
 	$(CC) $(CFLAGS) $< -o $@
 	
 $(BUILD_DIR)/expr_traverse.o: $(EXPRTRAVERSE_DIR)/expr_traverse.c

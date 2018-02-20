@@ -4573,5 +4573,5 @@ SqlTraverser* createSqlTraverser(){
 	traverser->__contextMap = createObjectMap();
 	traverser->__tableInfoMap = createObjectMap();
 	traverser->__unTableDeterminedList = createList();
-	return traverser;
+	return (void*)traverser;
 }

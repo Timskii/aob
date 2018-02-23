@@ -16,13 +16,9 @@ type ServerAdmin struct{
 
 }
 
-func (*ServerAdmin) ParseSql (ctx context.Context, script *pb.Script) (*pb.ObjScript, error){
+func (*ServerAdmin) ParseSql (ctx context.Context, script *pb.Script) (*pb.ObjScripts, error){
 	log.Println("parseSql",script)
-	objScript := &pb.ObjScript{`{`+
-		`"select":"*",`+
-		`"from":"test1"`+
-		`}`}
-	
-	return objScript, nil
+	objScripts, err := parserData(script)	
+	return objScripts, err
 }
 

@@ -19,12 +19,12 @@ type ServerAdmin struct{
 func (*ServerAdmin) ParseAndCheckAccess (ctx context.Context, userSql *pb.UserSql) (*pb.UserSql, error){
 	log.Println(userSql)
 	userSql.Script = "select * from test"
-	parser(userSql)
+	parseSql(userSql)
 	cache(userSql)
 	return userSql,nil
 }
 
-func (*ServerAdmin) ParseSql (ctx context.Context, script *pb.Script) (*pb.ObjScript, error){
+func (*ServerAdmin) ParseSql (ctx context.Context, script *pb.Script) (*pb.ObjScripts, error){
 	return nil, nil
 }
 func (*ServerAdmin) CheckAccess(ctx context.Context, userSql *pb.UserSql) (*pb.UserSql, error) {

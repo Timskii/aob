@@ -1,8 +1,8 @@
 package core
 
 /*
- #cgo CFLAGS: -I. -I../gparser/core -I../gparser/ext/collection/includes -I../gparser/ext/expr_traverse -I../gparser/ext/node_visitor
- #cgo LDFLAGS: -L/opt/gopath/src/ps.kz/aob/sqlparser/core -lgspcollection -lgspcore -lparser  
+ #cgo CFLAGS: -I.
+ #cgo LDFLAGS: -L. -lparser -lgspcore -lgspcollection
  #include <parser.h>
  */
 import "C"
@@ -12,13 +12,13 @@ import (
  		pb "ps.kz/aob/sqlparser/protos"
  		)
 
-func parserData(sqlText string) (*pb.ObjScripts, error) {
+func main() () {
 	
-	/*sqlText = `CREATE TABLE test_set AS
+	sqlText := `CREATE TABLE test_set AS
 SELECT al.object_name, u.name
 FROM all_objects al, users u
 WHERE u.id = al.user
-AND SUBSTR(al.object_name,1,1) BETWEEN 'A' AND 'N';`*/
+AND SUBSTR(al.object_name,1,1) BETWEEN 'A' AND 'N';`
 	objScripts := new(pb.ObjScripts)
 
 	fmt.Println("<------------beg go C.parserData() -------------")
@@ -36,5 +36,5 @@ AND SUBSTR(al.object_name,1,1) BETWEEN 'A' AND 'N';`*/
 		}
 		objScripts.Objs = append(objScripts.Objs,objScript)
 	}
-	return objScripts, nil
+	//return objScripts, nil
 }

@@ -18,7 +18,7 @@ type ServerAdmin struct{
 
 func (*ServerAdmin) ParseSql (ctx context.Context, script *pb.Script) (*pb.ObjScripts, error){
 	log.Println("parseSql",script)
-	objScripts, err := parserData(script)	
+	objScripts, err := parserData(script.Script)	
 	return objScripts, err
 }
 

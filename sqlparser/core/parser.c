@@ -1,4 +1,3 @@
-
 #include "node_visitor.h"
 #include "gsp_base.h"
 #include "gsp_node.h"

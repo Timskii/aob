@@ -15,7 +15,7 @@ const (
 	
 )
 
-func parser(userSql *pb.UserSql){
+func parseSql(userSql *pb.UserSql){
 	conn, err := grpc.Dial(addressP, grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
@@ -29,7 +29,7 @@ func parser(userSql *pb.UserSql){
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)
 	}
-	userSql.Script = r.ObjScript
+	userSql.Obj = r.Objs
 	log.Printf("Greeting: %s", userSql.Script)
 }
 

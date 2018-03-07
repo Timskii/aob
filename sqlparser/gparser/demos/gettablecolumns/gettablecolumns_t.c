@@ -24,15 +24,13 @@ static gsp_objectname* _getTableName(gsp_node* table){
 	}
 	return NULL;
 }
-struct dataObj 
-{
 
-};
+typedef struct Table{
+	char *tableName;
+	char *columns[5];
+	
+}Table;
 
-struct table
-{
-	char name 	
-};
 static void _process_table(gsp_node *node, struct gsp_visitor *visitor){
 	
 	char *str;
@@ -125,7 +123,7 @@ static void _printListInfo(List *list, FILE *infoResult ){
 	_printInfo(infoResult,"\n");
 }
 
-int main(int argc,char *argv[])
+int parserData(char *sqlText)
 {
 	int rc, argIndex, index;
 	gsp_sqlparser *parser;
@@ -135,7 +133,7 @@ int main(int argc,char *argv[])
 	SqlTraverser* traverser;
 	FILE *infoResult= NULL;
 
-	char *sqlText = "select m.revision, m.esttim, t.data from mailstore m join testtable t on t.id = m.id";
+	//char *sqlText = "select m.revision, m.esttim, t.data from mailstore m join testtable t on t.id = m.id";
 
 	gsp_dbvendor vendor = dbvoracle;
 

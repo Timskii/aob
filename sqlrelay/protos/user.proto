@@ -9,4 +9,18 @@ service AOBService{
 message UserSql {
 	string user = 1;
 	string script = 2;
+	repeated ObjScript obj = 3;
+}
+
+message Script {
+	string script = 1;
+}
+
+message ObjScript {
+	string tablename = 1;
+	repeated string columns = 2;
+}
+
+message ObjScripts {
+	repeated ObjScript objs = 1;
 }

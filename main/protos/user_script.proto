@@ -4,14 +4,14 @@ package proto;
 
 service AOBService{
 	rpc ParseAndCheckAccess(UserSql) returns (UserSql){}
-	rpc ParseSql (Script) returns (ObjScript){}
+	rpc ParseSql (Script) returns (ObjScripts){}
 	rpc CheckAccess(UserSql) returns (UserSql){}
 }
 
 message UserSql {
 	string user = 1;
 	string script = 2;
-	reperated ObjScript obj = 3;
+	repeated ObjScript obj = 3;
 }
 
 message Script {
@@ -20,5 +20,9 @@ message Script {
 
 message ObjScript {
 	string tablename = 1;
-	reperated string columns = 2;
+	repeated string columns = 2;
+}
+
+message ObjScripts {
+	repeated ObjScript objs = 1;
 }

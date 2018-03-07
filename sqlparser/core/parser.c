@@ -11,7 +11,7 @@
 #include <stdio.h>
 
 Data data;
-int sizeTable = 0;
+int sizeTable;
 
 static gsp_objectname* _getTableName(gsp_node* table){
 	if(table->nodeType == t_gsp_table){
@@ -120,8 +120,9 @@ Data parserData(char *sqlText)
 			}
 		}
 	}
+	printf("sizeTable=%d\n",sizeTable);
 	data.size = sizeTable;
-	
+	sizeTable=0;
 	traverser->dispose(traverser);
 	_disposeVisitor(visitor);
 	gsp_parser_free(parser);

@@ -15,7 +15,7 @@ const (
 	
 )
 
-func parseSql(userSql *pb.UserSql){
+func (userSql *pb.UserSql) parseSql(){
 	conn, err := grpc.Dial(addressP, grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)

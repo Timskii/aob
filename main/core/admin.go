@@ -18,8 +18,7 @@ type ServerAdmin struct{
 
 func (*ServerAdmin) ParseAndCheckAccess (ctx context.Context, userSql *pb.UserSql) (*pb.UserSql, error){
 	log.Println(userSql)
-	//userSql.Script = "select * from test"
-	parseSql(userSql)
+	userSql.parseSql()
 	//cache(userSql)
 	return userSql,nil
 }

@@ -2,7 +2,6 @@ package core
 
 import (
 	"log"
-	
 
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
@@ -10,26 +9,25 @@ import (
 )
 
 const (
-	addressP = "localhost:4001"
+	addressP  = "localhost:4001"
 	addressCA = "localhost:4002"
-	
 )
 
-func (userSql *pb.UserSql) parseSql(){
+func parseSql(userSql *pb.UserSql) {
 	conn, err := grpc.Dial(addressP, grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
 	defer conn.Close()
 	c := pb.NewAOBServiceClient(conn)
-	
+
 	script := &pb.Script{userSql.Script}
 
 	r, err := c.ParseSql(context.Background(), script)
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)
 	}
-	userSql.Obj = r.Objs
+	userSql.Obj = r
 	log.Printf("Greeting: %s", userSql.Script)
 }
 

@@ -1,29 +1,28 @@
 package core
 
 import (
-		"log"
+	"log"
 
-		"golang.org/x/net/context"
-		pb "ps.kz/aob/main/protos"
-		)
+	"golang.org/x/net/context"
+	pb "ps.kz/aob/main/protos"
+)
 
 func NewAdminServer() *ServerAdmin {
 	s := new(ServerAdmin)
 	return s
 }
 
-type ServerAdmin struct{
-
+type ServerAdmin struct {
 }
 
-func (*ServerAdmin) ParseAndCheckAccess (ctx context.Context, userSql *pb.UserSql) (*pb.UserSql, error){
+func (*ServerAdmin) ParseAndCheckAccess(ctx context.Context, userSql *pb.UserSql) (*pb.UserSql, error) {
 	log.Println(userSql)
-	userSql.parseSql()
-	//cache(userSql)
-	return userSql,nil
+	parseSql(userSql)
+	cache(userSql)
+	return userSql, nil
 }
 
-func (*ServerAdmin) ParseSql (ctx context.Context, script *pb.Script) (*pb.ObjScripts, error){
+func (*ServerAdmin) ParseSql(ctx context.Context, script *pb.Script) (*pb.ObjScript, error) {
 	return nil, nil
 }
 func (*ServerAdmin) CheckAccess(ctx context.Context, userSql *pb.UserSql) (*pb.UserSql, error) {

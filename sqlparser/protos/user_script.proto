@@ -3,7 +3,7 @@ syntax = 'proto3';
 package proto;
 
 service AOBService{
-	rpc ParseSql (Script) returns (ObjScripts){}
+	rpc ParseSql (Script) returns (ObjScript){}
 }
 
 
@@ -12,10 +12,5 @@ message Script {
 }
 
 message ObjScript {
-	string tablename = 1;
-	repeated string columns = 2;
-}
-
-message ObjScripts {
-	repeated ObjScript objs = 1;
+	repeated string tableColumns = 1;
 }

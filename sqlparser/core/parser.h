@@ -2,15 +2,15 @@
 #define MAX_SIZE_TAB 128
 #define MAX_SIZE_COL 1024
 
-typedef struct Table{
+/*typedef struct Table{
 	char *tableName;
 	char *columns[MAX_SIZE_COL];
 	int size;
 	
-}Table;
+}Table;*/
 
 typedef struct Data{
-	Table *tables[MAX_SIZE_TAB];
+	char *tableColumns[MAX_SIZE_TAB];
 	int size;
 }Data;
 
